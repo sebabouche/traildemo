@@ -5,7 +5,7 @@ RSpec.describe PagesController, type: :controller do
     
     it "reads like a sentence (almost)" do
       get :home
-      expect(response).to have http_status(:success)
+      expect(response).to be_success
       expect(response).to render_template(:home)
     end
   end

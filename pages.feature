@@ -5,4 +5,4 @@ Feature: Visit static pages
   Scenario: Visitor visits the homepage
     Given I'm a "visitor"
     When I visit the "home"
-    Then The "home" is displayed
+    Then I can read the "headline" and "bodycopy"
