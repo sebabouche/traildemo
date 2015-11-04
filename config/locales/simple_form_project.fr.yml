@@ -1,0 +1,15 @@
+fr:
+  simple_form:
+    labels:
+      model_name:
+        attribute: ""
+        edit:
+          attribute: ""
+
+    hints:
+      model_name:
+        attribute: ""
+
+    include_blanks:
+    prompts:
+    placeholders:

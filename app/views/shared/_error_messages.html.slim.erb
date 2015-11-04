@@ -1,0 +1,12 @@
+- if object.errors.any?
+  div[id="error_explanation"]
+    .alert.alert-danger role="alert
+      | Ce formulaire contient 
+      = pluralize(object.errors.count, "erreur")
+      | .
+    
+    ul
+    - object.errors.full_messages.each do |msg|
+      li.text-danger.list-unstyled
+        i.glyphicon.glyphicon-remove
+        = msg

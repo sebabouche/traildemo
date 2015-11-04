@@ -1,0 +1,15 @@
+fr:
+  masc:
+    create:
+      success: "Le  a bien été créé."
+    update:
+      success: "Le  a bien été mis à jour."
+    destroy:
+      success: "Le  a bien été supprimé."
+  fem:
+    create:
+      success: "La  a bien été créée."
+    update:
+      success: "La  a bien été mise à jour."
+    destroy:
+      success: "La  a bien été supprimée."

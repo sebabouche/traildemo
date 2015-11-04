@@ -1,0 +1,77 @@
+html {
+  position: relative;
+  min-height:100%;
+}
+
+body { 
+  padding-top: 50px; 
+  //margin-bottom: 60px;
+  height: 100%;
+}
+
+h1 { 
+  margin-top: 10px;
+}
+
+.page-header {
+  border-bottom: 0;
+}
+
+.navbar-brand-img svg {
+    width: 28px;
+    height: 28px;
+}
+
+.nav-img svg {
+    width: 18px;
+    height: 18px;
+}
+
+.navbar-nav li a {
+    line-height: 25px;
+}
+
+.nothing {
+  background: #eeeeff;
+}
+
+@media (min-width: 768px) {
+  .navbar-nav > li > a.dropdown-toggle.nav-img {
+    padding: 12px 12px 9px 12px;
+  }  
+}
+
+.thumbnail-offer {
+  border-width: 1px 1px 0px 1px;
+  margin-bottom: 0;
+  background: #fff;
+  padding: 0;
+}
+
+.thumbnail-offer-event {
+  @extend .thumbnail-offer;
+	border-width: 0px 1px 0px 1px;
+}
+
+.press-thumbnail {
+    background: #fff;
+    height:110px;
+}
+
+.panel-manage {
+  margin-bottom: 0px;
+  border-bottom-width: 0px;
+}
+
+.lh {
+  line-height: 30px;
+}
+
+.whitetxt {
+  color: #fff;
+} 
+.caption {
+  line-height: 22px;
+  font-weight: 300;
+}
+

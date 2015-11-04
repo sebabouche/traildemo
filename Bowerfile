@@ -1,0 +1,10 @@
+# A sample Bowerfile
+# Check out https://github.com/42dev/bower-rails#ruby-dsl-configuration for more options
+
+asset 'html.sortable'
+asset 'select2'
+asset 'select2-bootstrap-css'
+asset 'waitForImages'
+asset 'share-button'
+asset 'bootstrap-colorpicker'
+asset 'bootstrap-select'

@@ -1,0 +1,21 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+
+development:
+  <<: *default
+  database: appcustom_development
+
+test: &test
+  <<: *default
+  database: appcustom_test
+
+production:
+  <<: *default
+  database: appcustom_production
+  username: appcustom
+  password: <%= ENV['APP_DATABASE_PASSWORD'] %>
+
+cucumber:
+  <<: *test

@@ -1,0 +1,13 @@
+mail_form:
+  models:
+    contact_form: "Formulaire de contact"
+  attributes:
+    contact_form:
+      email: "E-mail"
+      telephone: "Numéro de téléphone"
+      phone: "Numéro de téléphone"
+      message: "Message envoyé"
+  request:
+    title: "Infos techs sur l'utilisateur"
+    remote_ip: "Addresse IP"
+    user_agent: "Navigateur"

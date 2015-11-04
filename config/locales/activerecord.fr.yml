@@ -1,0 +1,6 @@
+fr:
+  activerecord:
+    models:
+      model_name:
+        one: "model"
+        other: "models"

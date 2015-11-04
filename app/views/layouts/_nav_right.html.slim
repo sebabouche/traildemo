@@ -1,0 +1,23 @@
+li class="dropdown"
+  a[href="#" class="dropdown-toggle nav-img" data-toggle="dropdown"]
+    - if admin_signed_in? 
+      = current_admin.email
+    - elsif user_signed_in?
+      current_user.email
+    - else
+      span Se connecter
+    span class="caret"
+
+  ul[class="dropdown-menu" role="menu"]
+
+    - if admin_signed_in?
+      li =link_to "Déconnexion", destroy_admin_session_path, :method=>'delete'
+
+    - elsif user_signed_in?
+      li =link_to "Editer mon compte", edit_user_registration_path
+      li.divider role="separator" 
+      li =link_to "Déconnexion", destroy_user_session_path, :method=>'delete'
+
+    - else
+      li = link_to "Se connecter", new_user_session_path
+      li = link_to "S'inscrire", new_user_registration_path

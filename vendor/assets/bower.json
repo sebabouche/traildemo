@@ -1,0 +1,12 @@
+{
+  "name": "dsl-generated dependencies",
+  "dependencies": {
+    "html.sortable": "latest",
+    "select2": "latest",
+    "select2-bootstrap-css": "latest",
+    "waitForImages": "latest",
+    "share-button": "latest",
+    "bootstrap-colorpicker": "latest",
+    "bootstrap-select": "latest"
+  }
+}
