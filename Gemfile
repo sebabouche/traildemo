@@ -61,6 +61,10 @@ gem 'therubyracer', :platform=>:ruby
 gem 'awesome_print'
 gem 'faker'
 
+gem "trailblazer"
+gem "trailblazer-rails" # if you are in rails.
+gem "cells"
+
 ### APIS ### 
 
 # gem 'newrelic_rpm'
