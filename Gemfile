@@ -94,6 +94,7 @@ group :development, :test do
   gem 'guard-cucumber'
   gem 'rspec-rails'
   gem 'guard-rspec', require: false
+  gem 'rspec-trailblazer', git: "https://github.com/trailblazer/rspec-trailblazer.git"
   gem 'capybara'
   gem 'database_cleaner'
   gem 'launchy'

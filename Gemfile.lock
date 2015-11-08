@@ -8,6 +8,13 @@ GIT
       rest-client (~> 1.8)
       sinatra (~> 1.4.5)
 
+GIT
+  remote: https://github.com/trailblazer/rspec-trailblazer.git
+  revision: 5bd886213108e66271b984600cfb2a8e4b18955d
+  specs:
+    rspec-trailblazer (0.2.0)
+      rspec
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -518,6 +525,7 @@ DEPENDENCIES
   refile-mini_magick
   refile-s3
   rspec-rails
+  rspec-trailblazer!
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
   seed_dump
