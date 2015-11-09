@@ -1,5 +1,8 @@
 class Thing < ActiveRecord::Base
   class Create < Trailblazer::Operation
+    include CRUD
+    model Thing, :create
+
     contract do
       property :name
       property :description
@@ -9,9 +12,7 @@ class Thing < ActiveRecord::Base
     end
 
     def process(params)
-      thing = Thing.new
-      
-      validate(params[:thing], thing) do |f|
+      validate(params[:thing]) do |f|
         f.save
       end
     end
