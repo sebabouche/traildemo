@@ -12,19 +12,12 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require bootsy
 
 // GEMS
-//= require bootstrap
 //= require cocoon
-//= require lightbox
 //= require refile
-//= require moment
-//= require moment/fr
-//= require bootstrap-datetimepicker
 
 // BOWER
-//= require html.sortable
 
 
 //= require turbolinks

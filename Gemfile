@@ -26,7 +26,6 @@ gem 'omniauth-facebook'
 
 
 gem 'simple_form'
-gem 'bootstrap-sass'
 
 gem 'money-rails'
 gem 'rails-timeago'
@@ -34,18 +33,7 @@ gem 'numbers_and_words'
 gem 'draper'
 gem 'amoeba'
 
-gem 'cocoon'
 gem 'will_paginate'
-gem 'bootstrap-will_paginate'
-gem 'bootsy'
-gem 'bootstrap_form'
-gem 'bootstrap-datepicker-rails'
-gem 'bootstrap-timepicker-rails-addon', '~> 0.5.1'
-gem 'momentjs-rails', '>= 2.9.0'
-gem 'bootstrap3-datetimepicker-rails', '~> 4.15.35'
-gem 'font-awesome-rails'
-gem 'font-awesome-sass'
-gem 'lightbox2-rails'
 
 gem 'mail_form'
 gem 'premailer-rails'
