@@ -1,0 +1,11 @@
+h1 Things
+
+- if @things.present?
+  ul
+    - @things.each do |thing|
+      li
+        strong = thing.name
+        span> ,
+        small = thing.description
+- else
+  em no things!

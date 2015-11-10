@@ -1,11 +1,10 @@
 Rails.application.routes.draw do
 
+  root 'home#index'
 
-  mount Bootsy::Engine => '/bootsy', as: 'bootsy'
+  resources :things
 
   devise_for :users #, :controllers => { :omniauth_callbacks => "callbacks" }
   devise_for :admins
-
-  root 'pages#home'
 
 end

@@ -1,6 +1,6 @@
 class Thing < ActiveRecord::Base
   class Create < Trailblazer::Operation
-    include CRUD
+    include Model
     model Thing, :create
 
     contract do
@@ -15,6 +15,14 @@ class Thing < ActiveRecord::Base
       validate(params[:thing]) do |f|
         f.save
       end
+    end
+  end
+
+  class Update < Create
+    action :update
+
+    contract do
+      property :name, writeable: false
     end
   end
 end

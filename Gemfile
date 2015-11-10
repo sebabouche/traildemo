@@ -29,7 +29,6 @@ gem 'simple_form'
 gem 'bootstrap-sass'
 
 gem 'money-rails'
-gem 'rails-timeago'
 gem 'numbers_and_words'
 gem 'draper'
 gem 'amoeba'
@@ -64,6 +63,7 @@ gem 'faker'
 gem "trailblazer"
 gem "trailblazer-rails" # if you are in rails.
 gem "cells"
+gem "cells-slim"
 
 ### APIS ### 
 
@@ -89,17 +89,23 @@ group :development, :test do
   gem 'byebug'
   gem 'web-console', '~> 2.0'
   gem 'spring'
+
   gem 'guard'
-  gem 'cucumber-rails', require: false
   gem 'guard-cucumber'
-  gem 'rspec-rails'
   gem 'guard-rspec', require: false
+
+  gem 'cucumber-rails', require: false
+
+  gem 'rspec-rails'
+  gem 'rspec-cells'
   gem 'rspec-trailblazer', git: "https://github.com/trailblazer/rspec-trailblazer.git"
+  gem 'shoulda-matchers', require: false
+
   gem 'capybara'
+  gem 'selenium-webdriver'
+
   gem 'database_cleaner'
   gem 'launchy'
-  gem 'selenium-webdriver'
-  gem 'shoulda-matchers', require: false
   gem 'factory_girl_rails'
 end
 
