@@ -14,7 +14,6 @@
 //= require jquery_ujs
 
 // GEMS
-//= require cocoon
 //= require refile
 
 // BOWER

@@ -1,6 +1,12 @@
 source 'https://rubygems.org'
 
+
+######## RUBY ########
+
 ruby '2.2.3'
+
+
+######## RAILS ########
 
 gem 'rails', '~>4.2'
 gem 'pg'
@@ -19,11 +25,13 @@ gem "slim-rails"
 
 gem "bower-rails", "~> 0.10.0"
 
+
+######## MAIN GEMS ########
+
 gem 'devise'
 gem 'devise-i18n'
 gem 'omniauth'
 gem 'omniauth-facebook'
-
 
 gem 'simple_form'
 
@@ -49,15 +57,20 @@ gem 'therubyracer', :platform=>:ruby
 gem 'awesome_print'
 gem 'faker'
 
-### APIS ### 
+
+######## APIS ######## 
 
 # gem 'newrelic_rpm'
 gem 'stripe'
 gem 'gibbon'
 gem 'mandrill'
 
-gem 'wicked_pdf'
-gem 'wkhtmltopdf-binary'
+
+######## OPTIONAL ########
+
+# gem 'wicked_pdf'
+# gem 'wkhtmltopdf-binary'
+# gem 'roo'
 
 
 
@@ -68,23 +81,33 @@ group :development do
   gem 'seed_dump'
 end
 
+
+
 group :development, :test do
   gem 'dotenv-rails'
   gem 'byebug'
   gem 'web-console', '~> 2.0'
   gem 'spring'
+
   gem 'guard'
-  gem 'cucumber-rails', require: false
   gem 'guard-cucumber'
-  gem 'rspec-rails'
   gem 'guard-rspec', require: false
+
+  gem 'cucumber-rails', require: false
+
+  gem 'rspec-rails'
+  gem 'shoulda-matchers', require: false
+
   gem 'capybara'
+  gem 'selenium-webdriver'
+
   gem 'database_cleaner'
   gem 'launchy'
-  gem 'selenium-webdriver'
-  gem 'shoulda-matchers', require: false
+  gem 'factory_girl_rails'
   gem 'factory_girl_rails'
 end
+
+
 
 group :production, :staging do
   gem 'rails_12factor'
