@@ -1,4 +1,4 @@
-li class="dropdown"
+/li class="dropdown"
   a[href="#" class="dropdown-toggle nav-img" data-toggle="dropdown"]
     - if admin_signed_in? 
       = current_admin.email
@@ -8,7 +8,7 @@ li class="dropdown"
       span Se connecter
     span class="caret"
 
-  ul[class="dropdown-menu" role="menu"]
+  /ul[class="dropdown-menu" role="menu"]
 
     - if admin_signed_in?
       li =link_to "Déconnexion", destroy_admin_session_path, :method=>'delete'

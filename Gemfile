@@ -65,6 +65,9 @@ gem "trailblazer-rails" # if you are in rails.
 gem "cells"
 gem "cells-slim"
 
+gem 'email_validator'
+gem 'phony_rails'
+
 ### APIS ### 
 
 # gem 'newrelic_rpm'
