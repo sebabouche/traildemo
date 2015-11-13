@@ -5,7 +5,8 @@ class ThingsController < ApplicationController
   end
 
   def show
-    @thing = Thing.find(params[:id])
+    present Thing::Update
+    form Comment::Create
   end
 
   def new
@@ -32,5 +33,12 @@ class ThingsController < ApplicationController
     end
 
     render action: :new
+  end
+
+  def create_comment
+    present Thing::Update
+    run Comment::Create
+
+    render action: :show
   end
 end

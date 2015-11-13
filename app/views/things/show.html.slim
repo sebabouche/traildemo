@@ -1,7 +1,17 @@
-h1 Show thing
+h1
+  = @thing.name
+  small< = link_to "Edit", edit_thing_path(@thing)
 
-- if @thing.present?
-  h2 = @thing.name
-  p = @thing.description
-- else
-  em No things
+p = @thing.description
+
+= simple_form_for @form, url: create_comment_thing_path(@thing) do |f|
+  = f.error_notification
+
+  = f.input :body
+  = f.collection_radio_buttons :weight, *@form.weights
+
+  = f.simple_fields_for :user do |ff|
+    = ff.input :email
+
+  = f.button :submit
+

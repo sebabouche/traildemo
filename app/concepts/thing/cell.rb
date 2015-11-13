@@ -1,8 +1,11 @@
 class Thing::Cell < Cell::Concept
-  include ActionView::Helpers::DateHelper
-
   property :name
   property :created_at
+
+  include ActionView::Helpers::DateHelper
+
+  include Cell::GridCell
+  self.classes = ["box", "col-md-4", "col-sm-6"]
 
   def show
     render

@@ -1,0 +1,6 @@
+= container do
+  - if nice?
+    <i class="fa fa-heart"></i>
+  = user.email
+  = link_to created_at, "#comment-#{model.id}"
+  = body
