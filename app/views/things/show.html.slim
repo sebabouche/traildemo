@@ -1,17 +1,24 @@
-h1
-  = @thing.name
-  small< = link_to "Edit", edit_thing_path(@thing)
+.panel.panel-info
+  .panel-heading
+    h1
+      = @thing.name
+      small< = link_to "Edit", edit_thing_path(@thing)
+  .panel-body
+    p = @thing.description
 
-p = @thing.description
+    /= concept "comment/cell", collection: @thing.comments.limit(10)
+    = concept "comment/cell/grid", @thing
 
-= simple_form_for @form, url: create_comment_thing_path(@thing) do |f|
-  = f.error_notification
+.panel.panel-default
+  .panel-body
+    = simple_form_for @form, url: create_comment_thing_path(@thing) do |f|
+      = f.error_notification
 
-  = f.input :body
-  = f.collection_radio_buttons :weight, *@form.weights
+      = f.input :body
+      = f.collection_radio_buttons :weight, *@form.weights
 
-  = f.simple_fields_for :user do |ff|
-    = ff.input :email
+      = f.simple_fields_for :user do |ff|
+        = ff.input :email
 
-  = f.button :submit
+      = f.button :submit
 
