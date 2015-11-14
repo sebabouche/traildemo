@@ -1,13 +1,4 @@
 GIT
-  remote: https://github.com/apotonick/kaminari-cells
-  revision: 3f9d976155ff5c741eda56b38900f78969b3ec8a
-  branch: cells-4
-  specs:
-    kaminari-cells (0.0.4)
-      cells (>= 4.0.0, <= 5.0.0)
-      kaminari (>= 0.16.0)
-
-GIT
   remote: https://github.com/refile/refile.git
   revision: 68987fe98f1432dc9e6fa532940331f77193cfc8
   branch: master
@@ -228,6 +219,9 @@ GEM
     kaminari (0.16.3)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
+    kaminari-cells (0.0.4)
+      cells (>= 4.0.0, <= 5.0.0)
+      kaminari (>= 0.16.0)
     launchy (2.4.3)
       addressable (~> 2.3)
     libv8 (3.16.14.13)
@@ -521,7 +515,7 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   kaminari
-  kaminari-cells!
+  kaminari-cells
   launchy
   lightbox2-rails
   mail_form

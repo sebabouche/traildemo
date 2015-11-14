@@ -19,7 +19,7 @@ class Comment::Cell < Cell::Concept
   end
 
   class Grid < Cell::Concept
-    # inherit_views Comment::Cell
+    inherit_views Comment::Cell
 
     include Kaminari::Cells
 

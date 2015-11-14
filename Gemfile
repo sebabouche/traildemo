@@ -64,8 +64,8 @@ gem "cells"
 gem "cells-slim"
 
 gem "kaminari"
-# gem "kaminari-cells"
-gem "kaminari-cells", git: "https://github.com/apotonick/kaminari-cells", branch: "cells-4"
+gem "kaminari-cells"
+# "kaminari-cells", git: "https://github.com/apotonick/kaminari-cells", branch: "cells-4"
 
 gem 'email_validator'
 gem 'phony_rails'
