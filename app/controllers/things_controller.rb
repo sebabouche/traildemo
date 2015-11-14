@@ -1,7 +1,7 @@
 class ThingsController < ApplicationController
 
   def index
-    @things = Thing.all
+    @things = Thing.all.page(1).per(2)
   end
 
   def show
@@ -18,7 +18,7 @@ class ThingsController < ApplicationController
       return redirect_to op.model
     end
 
-    render action: :new
+    render :new
   end
 
   def edit
@@ -37,8 +37,11 @@ class ThingsController < ApplicationController
 
   def create_comment
     present Thing::Update
-    run Comment::Create
+    run Comment::Create do |op| # overrides @model and @form!
+      flash[:notice] = "Created comment for \"#{op.thing.name}\""
+      return redirect_to thing_path(op.thing)
+    end
 
-    render action: :show
+    render :show
   end
 end

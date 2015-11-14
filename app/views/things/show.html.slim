@@ -12,13 +12,15 @@
 .panel.panel-default
   .panel-body
     = simple_form_for @form, url: create_comment_thing_path(@thing) do |f|
+      
       = f.error_notification
 
       = f.input :body
-      = f.collection_radio_buttons :weight, *@form.weights
+      = f.collection_radio_buttons :weight, *@form.weights, 
+                                   item_wrapper_class: :radio,
+                                   item_wrapper_tag: :div
 
       = f.simple_fields_for :user do |ff|
         = ff.input :email
 
       = f.button :submit
-

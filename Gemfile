@@ -34,8 +34,6 @@ gem 'draper'
 gem 'amoeba'
 
 gem 'cocoon'
-# gem 'will_paginate'
-# gem 'bootstrap-will_paginate'
 gem 'bootsy'
 gem 'bootstrap_form'
 gem 'bootstrap-datepicker-rails'
@@ -64,7 +62,10 @@ gem "trailblazer"
 gem "trailblazer-rails" # if you are in rails.
 gem "cells"
 gem "cells-slim"
-gem "kaminari-cells"
+
+gem "kaminari"
+# gem "kaminari-cells"
+gem "kaminari-cells", git: "https://github.com/apotonick/kaminari-cells", branch: "cells-4"
 
 gem 'email_validator'
 gem 'phony_rails'

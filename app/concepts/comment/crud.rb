@@ -4,11 +4,6 @@ class Comment < ActiveRecord::Base
     model Comment, :create
 
     contract do
-      property :body
-      property :weight, prepopulator: -> (*) { self.weight= "0" }
-      property :thing
-
-      validates :body, length: { in: 6..160 }
 
       def self.weights
         {"0" => "Nice! ", "1" => "Rubbish! "}
@@ -18,6 +13,11 @@ class Comment < ActiveRecord::Base
         [self.class.weights.to_a, :first, :last]
       end
 
+      property :body
+      property :weight, prepopulator: -> (*) { self.weight= "0" }
+      property :thing
+
+      validates :body, length: { in: 6..160 }
       validates :weight, inclusion: { in: weights.keys }
       validates :thing, :user, presence: true
 
@@ -46,7 +46,7 @@ class Comment < ActiveRecord::Base
     private
 
     def setup_model!(params) # run before process
-      model.thing = Thing.find_by_id(params[:thing_id])
+      model.thing = Thing.find_by_id(params[:id])
       
       ### if static population
       model.build_user

@@ -17,5 +17,26 @@ class Comment::Cell < Cell::Concept
   def nice?
     model.weight == 0
   end
+
+  class Grid < Cell::Concept
+    # inherit_views Comment::Cell
+
+    include Kaminari::Cells
+
+    def show
+      # render :grid
+      concept("comment/cell", collection: comments) + paginate(comments) + raw("<strong>OK!!!</strong>")
+    end
+
+    private
+
+    def comments
+      @comments ||= model.comments.page(page).per(3)
+    end
+
+    def page
+      options[:page] or 1
+    end
+  end
   
 end
