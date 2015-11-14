@@ -22,10 +22,15 @@ class Comment::Cell < Cell::Concept
     inherit_views Comment::Cell
 
     include Kaminari::Cells
+    include ActionView::Helpers::JavaScriptHelper
 
     def show
-      # render :grid
-      concept("comment/cell", collection: comments) + paginate(comments) + raw("<strong>OK!!!</strong>")
+      render :grid
+      #concept("comment/cell", collection: comments) + paginate(comments) + raw("<strong>OK!!!</strong>")
+    end
+
+    def append
+      %{ $("#next").replaceWith("#{j(show)}") }
     end
 
     private

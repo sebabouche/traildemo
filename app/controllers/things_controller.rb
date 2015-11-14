@@ -44,4 +44,11 @@ class ThingsController < ApplicationController
 
     render :show
   end
+
+  def next_comments
+    present Thing::Update
+
+    render js:
+      concept("comment/cell/grid", @thing, page: params[:page]).(:append)
+  end
 end

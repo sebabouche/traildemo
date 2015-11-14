@@ -6,8 +6,6 @@
   .panel-body
     p = @thing.description
 
-    /= concept "comment/cell", collection: @thing.comments.limit(10)
-    = concept "comment/cell/grid", @thing
 
 .panel.panel-default
   .panel-body
@@ -24,3 +22,12 @@
         = ff.input :email
 
       = f.button :submit
+
+.panel.panel-default
+  .panel-body
+    h3 
+      span> = @thing.comments.size
+      span> comments
+
+    /= concept "comment/cell", collection: @thing.comments.limit(10)
+    = concept "comment/cell/grid", @thing

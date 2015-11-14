@@ -11,7 +11,7 @@ RSpec.describe Comment do
           weight: "1",
           user:   { email: "jonny@trb.org" }
         },
-        thing_id: thing.id
+        id: thing.id
       )
 
       comment = op.model
