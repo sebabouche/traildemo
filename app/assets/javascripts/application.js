@@ -16,7 +16,6 @@
 
 // GEMS
 //= require bootstrap
-//= require cocoon
 //= require lightbox
 //= require refile
 //= require moment

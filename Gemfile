@@ -19,10 +19,10 @@ gem "slim-rails"
 
 gem "bower-rails", "~> 0.10.0"
 
-gem 'devise'
-gem 'devise-i18n'
-gem 'omniauth'
-gem 'omniauth-facebook'
+# gem 'devise'
+# gem 'devise-i18n'
+# gem 'omniauth'
+# gem 'omniauth-facebook'
 
 
 gem 'simple_form'
@@ -30,10 +30,10 @@ gem 'bootstrap-sass'
 
 gem 'money-rails'
 gem 'numbers_and_words'
-gem 'draper'
-gem 'amoeba'
+# gem 'draper'
+# gem 'amoeba'
 
-gem 'cocoon'
+# gem 'cocoon'
 gem 'bootsy'
 gem 'bootstrap_form'
 gem 'bootstrap-datepicker-rails'

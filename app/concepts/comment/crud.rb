@@ -25,7 +25,7 @@ class Comment < ActiveRecord::Base
       #property :user, prepopulator: -> (*) { self.user = User.new },
       #                populate_if_empty: -> (*) { User.new } do
       #
-      ### static population
+      ### static population see setup_model!
       property :user do
         property :email
         validates :email, presence: true, email: true

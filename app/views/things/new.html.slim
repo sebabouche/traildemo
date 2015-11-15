@@ -4,5 +4,10 @@
 
   = f.input :name, readonly: @form.readonly?(:name)
   = f.input :description
+
+  .panel.panel-default
+    .panel-body
+      = f.fields_for :users do |ff|
+        = ff.input :email
   
   = f.submit

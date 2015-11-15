@@ -10,7 +10,4 @@ Rails.application.routes.draw do
     end
   end
 
-  # devise_for :users #, :controllers => { :omniauth_callbacks => "callbacks" }
-  devise_for :admins
-
 end
