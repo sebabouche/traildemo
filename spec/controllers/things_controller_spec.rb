@@ -26,7 +26,6 @@ RSpec.describe ThingsController, type: :controller do
     it do
       get :show, id: thing.id
       res = HTMLEntities.new.decode(response.body)
-      ap res
       expect(res).to match(/Trailblazer/)
 
       expect(res).to have_selector(:css, "input.btn[value='Créer un(e) Comment']")
@@ -70,6 +69,33 @@ RSpec.describe ThingsController, type: :controller do
     it do
       put :update, { id: thing.id, thing: { description: "Is the best…" } }
       expect(response).to redirect_to thing_path(thing)
+    end
+  end
+
+  describe "#create_comment" do
+    let (:thing) { Thing::Create.(thing: {name: "Trailblazer"}).model }
+    it do
+      post :create_comment, { id: thing.id, comment: { body: "That green jacket!", weight: "1", user: { email: "seuros@trb.org" } } }
+      expect(flash[:notice]).to eq("Created comment for \"Trailblazer\"")
+    end
+  end
+
+  describe "#next_comments" do
+    let (:thing) do
+      thing = Thing::Create.call(thing: { name: "Trailblazer" }).model
+
+      Comment::Create.call(comment: { body: "Excellent", weight: "0", user: { email: "zavan@trb.org" }}, id: thing.id).model
+      Comment::Create.call(comment: { body: "!Well.", weight: "1", user: { email: "jonny@trb.org" }}, id: thing.id).model
+      Comment::Create.call(comment: { body: "Cool stuff!", weight: "0", user: { email: "chris@trb.org" }}, id: thing.id).model
+      Comment::Create.call(comment: { body: "Improving", weight: "1", user: { email: "hilz@trb.org" }}, id: thing.id).model
+
+      thing
+    end
+
+    it do
+      xhr :get, :next_comments, id: thing.id, page: 2
+
+      expect(response.body).to match /zavan@trb.org/
     end
   end
 end
