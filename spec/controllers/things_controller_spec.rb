@@ -12,11 +12,26 @@ RSpec.describe ThingsController, type: :controller do
   end
 
   describe "show" do
-    let (:thing) { Thing::Create.(thing: {name: "Trailblazer"}).model }
+    let (:thing) do
+      thing = Thing::Create.call(thing: { name: "Trailblazer" }).model
+
+      Comment::Create.call(comment: { body: "Excellent", weight: "0", user: { email: "zavan@trb.org" }}, id: thing.id).model
+      Comment::Create.call(comment: { body: "!Well.", weight: "1", user: { email: "jonny@trb.org" }}, id: thing.id).model
+      Comment::Create.call(comment: { body: "Cool stuff!", weight: "0", user: { email: "chris@trb.org" }}, id: thing.id).model
+      Comment::Create.call(comment: { body: "Improving", weight: "1", user: { email: "hilz@trb.org" }}, id: thing.id).model
+
+      thing
+    end
 
     it do
       get :show, id: thing.id
-      expect(response.body).to match(/Trailblazer/)
+      res = HTMLEntities.new.decode(response.body)
+      ap res
+      expect(res).to match(/Trailblazer/)
+
+      expect(res).to have_selector(:css, "input.btn[value='Créer un(e) Comment']")
+      expect(res).to have_selector(".comment_user_email")
+      expect(res).to have_selector(".comments .comment")
     end
   end
 
