@@ -5,6 +5,9 @@
       small< = link_to "Edit", edit_thing_path(@thing)
   .panel-body
     p = @thing.description
+  .panel-footer
+    - @thing.users.each do |user|
+      span> = user.email
 
 
 .panel.panel-default

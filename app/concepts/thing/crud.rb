@@ -16,7 +16,14 @@ class Thing < ActiveRecord::Base
          skip_if: :all_blank do
         property :email
         validates :email, presence: true, email: true
+        validate :authorship_limit_reached?
+
+        def authorship_limit_reached?
+          return if model.authorships.find_all { |au| au.confirmed == false }.size < 5
+          errors.add(:user, "This user has too many unconfirmed authorships.")
+        end
       end
+      validates :users, length: {maximum: 3}
 
       private
 
@@ -25,14 +32,21 @@ class Thing < ActiveRecord::Base
       end
 
       def populate_users!(params, options)
-        User.find_by_email(params[email]) or User.new
+        User.find_by_email(params[:email]) or User.new
       end
     end
 
     def process(params)
       validate(params[:thing]) do |f|
         f.save
+        reset_authorships!
       end
+    end
+
+    private
+
+    def reset_authorships!
+      model.authorships.each { |au| au.update(confirmed: false) }
     end
   end
 
