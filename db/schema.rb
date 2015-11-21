@@ -11,79 +11,64 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151115113951) do
+ActiveRecord::Schema.define(version: 20151121164755) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "admins", force: :cascade do |t|
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
-    t.string   "email",                  default: "", null: false
-    t.string   "encrypted_password",     default: "", null: false
-    t.string   "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,  null: false
-    t.datetime "current_sign_in_at"
-    t.datetime "last_sign_in_at"
-    t.inet     "current_sign_in_ip"
-    t.inet     "last_sign_in_ip"
-  end
-
-  add_index "admins", ["email"], name: "index_admins_on_email", unique: true, using: :btree
-  add_index "admins", ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true, using: :btree
-
   create_table "authorships", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "thing_id"
-    t.boolean  "confirmed"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "confirmed"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
-  add_index "authorships", ["thing_id"], name: "index_authorships_on_thing_id", using: :btree
-  add_index "authorships", ["user_id"], name: "index_authorships_on_user_id", using: :btree
+  create_table "cache_versions", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "updated_at", null: false
+    t.datetime "created_at", null: false
+  end
 
   create_table "comments", force: :cascade do |t|
     t.text     "body"
     t.integer  "weight"
+    t.integer  "deleted"
     t.integer  "thing_id"
     t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
-  add_index "comments", ["thing_id"], name: "index_comments_on_thing_id", using: :btree
-  add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
+  create_table "endorsements", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "thing_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "things", force: :cascade do |t|
     t.text     "name"
     t.text     "description"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.text     "image_meta_data"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "things_users", id: false, force: :cascade do |t|
+    t.integer "thing_id", null: false
+    t.integer "user_id",  null: false
   end
 
   create_table "users", force: :cascade do |t|
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
-    t.string   "email",                  default: "", null: false
-    t.string   "encrypted_password",     default: "", null: false
-    t.string   "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,  null: false
-    t.datetime "current_sign_in_at"
-    t.datetime "last_sign_in_at"
-    t.inet     "current_sign_in_ip"
-    t.inet     "last_sign_in_ip"
+    t.string   "email"
+    t.string   "password_digest"
+    t.string   "confirmation_token"
+    t.text     "image_meta_data"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
-  add_foreign_key "authorships", "things"
-  add_foreign_key "authorships", "users"
-  add_foreign_key "comments", "things"
-  add_foreign_key "comments", "users"
 end

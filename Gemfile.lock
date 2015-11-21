@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/refile/refile.git
-  revision: 68987fe98f1432dc9e6fa532940331f77193cfc8
+  revision: 6d06fe28d11b2aaeee900b63c1c25e620bc7da1a
   branch: master
   specs:
     refile (0.6.2)
@@ -137,6 +137,11 @@ GEM
     dotenv-rails (2.0.2)
       dotenv (= 2.0.2)
       railties (~> 4.0)
+    draper (2.1.0)
+      actionpack (>= 3.0)
+      activemodel (>= 3.0)
+      activesupport (>= 3.0)
+      request_store (~> 1.0)
     email_validator (1.6.0)
       activemodel
     erubis (2.7.0)
@@ -208,7 +213,7 @@ GEM
     libv8 (3.16.14.13)
     lightbox2-rails (2.7.1)
       railties (>= 3.1)
-    listen (3.0.4)
+    listen (3.0.5)
       rb-fsevent (>= 0.9.3)
       rb-inotify (>= 0.9)
     loofah (2.0.3)
@@ -226,7 +231,7 @@ GEM
     mime-types (2.6.2)
     mini_magick (4.3.6)
     mini_portile (0.6.2)
-    minitest (5.8.2)
+    minitest (5.8.3)
     momentjs-rails (2.10.6)
       railties (>= 3.1)
     monetize (1.1.0)
@@ -243,7 +248,7 @@ GEM
     multipart-post (2.0.0)
     nenv (0.2.0)
     netrc (0.11.0)
-    nokogiri (1.6.6.2)
+    nokogiri (1.6.6.3)
       mini_portile (~> 0.6.0)
     notiffany (0.0.8)
       nenv (~> 0.1)
@@ -251,7 +256,7 @@ GEM
     numbers_and_words (0.10.0)
       activesupport
       i18n
-    pg (0.18.3)
+    pg (0.18.4)
     phony (2.15.8)
     phony_rails (0.12.11)
       activesupport (>= 3.0)
@@ -325,6 +330,7 @@ GEM
     remotipart (1.2.1)
     representable (2.3.0)
       uber (~> 0.0.7)
+    request_store (1.2.0)
     rest-client (1.8.0)
       http-cookie (>= 1.0.2, < 2.0)
       mime-types (>= 1.16, < 3.0)
@@ -336,7 +342,7 @@ GEM
     rspec-cells (0.3.3)
       cells (~> 4.0.0.beta5)
       rspec-rails (~> 3.2)
-    rspec-core (3.4.0)
+    rspec-core (3.4.1)
       rspec-support (~> 3.4.0)
     rspec-expectations (3.4.0)
       diff-lcs (>= 1.2.0, < 2.0)
@@ -392,7 +398,7 @@ GEM
       railties (>= 3.1, < 5.0)
       slim (~> 3.0)
     slop (3.6.0)
-    spring (1.4.1)
+    spring (1.4.4)
     sprockets (3.4.0)
       rack (> 1, < 3)
     sprockets-rails (2.3.3)
@@ -457,6 +463,7 @@ DEPENDENCIES
   cucumber-rails
   database_cleaner
   dotenv-rails
+  draper
   email_validator
   factory_girl_rails
   faker

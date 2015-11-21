@@ -6,13 +6,8 @@ abort("The Rails environment is running in production mode!") if Rails.env.produ
 require 'spec_helper'
 require 'rspec/rails'
 # Add additional requires below this line. Rails is not loaded until this point!
-require 'devise'
 require 'capybara/rspec'
 require 'shoulda/matchers'
-
-RSpec.configure do |config|
-  config.include Devise::TestHelpers, :type => :controller
-end
 
 Shoulda::Matchers.configure do |config|
   config.integrate do |with|

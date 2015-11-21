@@ -39,15 +39,20 @@ RSpec.describe ThingsController, type: :controller do
       get :new
       expect(response.body).to have_selector(:css, "form #thing_name")
       expect(response.body).not_to have_selector(:css, "form #thing_name.readonly")
+      expect(response.body).to have_selector("input.email", count: 3)
     end
   end
 
   describe "#edit" do
-    let (:thing) { Thing::Create.(thing: {name: "Trailblazer"}).model }
+    let (:thing) { Thing::Create.(thing: {name: "Trailblazer", users: [{"email"=>"joe@trb.org"}]}).model }
  
     it do
       get :edit, id: thing.id
       expect(response.body).to have_selector(:css, "form #thing_name.readonly[value='Trailblazer']")
+      expect(response.body).to have_selector(:css, "#thing_users_attributes_0_email.readonly[value='joe@trb.org']")
+      expect(response.body).to have_selector(:css, "#thing_users_attributes_0_remove")
+      expect(response.body).to have_selector(:css, "#thing_users_attributes_1_email")
+      expect(response.body).to have_selector(:css, "#thing_users_attributes_2_email")
     end
   end
 
@@ -60,6 +65,8 @@ RSpec.describe ThingsController, type: :controller do
     it 'renders new if invalid' do
       post :create, {thing: {name: ""}} 
       expect(response).to render_template(:new)
+      expect(response.body).to have_selector(:css, "div.alert")
+      expect(response.body).to have_selector("input.email", count: 3)
     end
   end
 

@@ -4,8 +4,11 @@ class Thing < ActiveRecord::Base
     model Thing, :create
 
     contract do
+      feature Disposable::Twin::Persisted
+
       property :name
       property :description
+      property :file, virtual: true
 
       validates :name, presence: true
       validates :description, length: {in: 4..160}, allow_blank: true
@@ -14,6 +17,7 @@ class Thing < ActiveRecord::Base
          prepopulator: :prepopulate_users!,
          populate_if_empty: :populate_users!,
          skip_if: :all_blank do
+
         property :email
         validates :email, presence: true, email: true
         validate :authorship_limit_reached?
@@ -36,17 +40,36 @@ class Thing < ActiveRecord::Base
       end
     end
 
+    include Dispatch
+    callback do 
+      collection :users do
+        on_add :notify_author!
+        on_add :reset_authorship! 
+      end
+      on_change :expire_cache! 
+    end
+    
+
     def process(params)
       validate(params[:thing]) do |f|
         f.save
-        reset_authorships!
+        dispatch!
       end
     end
 
     private
 
-    def reset_authorships!
-      model.authorships.each { |au| au.update(confirmed: false) }
+    def notify_author!(user)
+      # return UserMailer.welcome_and_added(user, model) if user.created?
+      # UserMailer.thing_added(thing_added)
+    end
+
+    def reset_authorship!(user)
+      user.model.authorships.find_by(thing_id: model.id).update_attribute(:confirmed, 0)
+    end
+
+    def expire_cache!(thing)
+      CacheVersion.for("thing/cell/grid").expire!
     end
   end
 
@@ -55,6 +78,29 @@ class Thing < ActiveRecord::Base
 
     contract do
       property :name, writeable: false
+
+      collection :users, inherit: true, skip_if: :skip_user? do
+        property :remove, virtual: true
+        property :email, skip_if: :skip_email?
+
+        def removeable?
+          model.persisted?
+        end
+
+        def skip_email?(fragment, options)
+          model.persisted?
+        end
+      end
+
+      private
+
+      def skip_user?(fragment, options)
+        if fragment[:remove] == "1"
+          users.delete(users.find { |u| u.id.to_s == fragment["id"] })
+          return true
+        end
+        return true if fragment["email"].blank?
+      end
     end
   end
 end

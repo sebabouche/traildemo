@@ -1,4 +1,11 @@
 class Thing::Cell < Cell::Concept
+
+  include Cell::Caching::Notifications
+  # cache :show do
+  #  [model.id, model.updated_at]
+  # end
+  # Now moved to Grid Cell
+
   property :name
   property :created_at
 
@@ -28,6 +35,11 @@ class Thing::Cell < Cell::Concept
   end
 
   class Grid < Cell::Concept
+    cache :show do
+      # Thing.latest.last.id # won't update cache if an older thing has been updated
+      CacheVersion.for("thing/cell/grid")
+    end
+
     def show
       things = Thing.latest
       concept("thing/cell", collection: things, last: Thing.last)

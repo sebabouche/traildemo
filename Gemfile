@@ -30,7 +30,7 @@ gem 'bootstrap-sass'
 
 gem 'money-rails'
 gem 'numbers_and_words'
-# gem 'draper'
+gem 'draper'
 # gem 'amoeba'
 
 # gem 'cocoon'
