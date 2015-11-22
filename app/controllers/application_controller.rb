@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   include Trailblazer::Operation::Controller
-  #require 'trailblazer/operation/controller/active_record'
-  #include Trailblazer::Operation::Controller::ActiveRecord # named instance variables.
+  require 'trailblazer/operation/controller/active_record'
+  include Trailblazer::Operation::Controller::ActiveRecord # named instance variables.
 
 end
