@@ -48,9 +48,11 @@ gem 'mail_form'
 gem 'premailer-rails'
 gem 'nokogiri'
 
-gem 'refile', require: "refile/rails", git: 'https://github.com/refile/refile.git', branch: 'master'
-gem "refile-mini_magick"
-gem "refile-s3"
+# gem 'refile', require: "refile/rails", git: 'https://github.com/refile/refile.git', branch: 'master'
+# gem "refile-mini_magick"
+# gem "refile-s3"
+gem 'paperdragon'
+gem 'file_validators'
 
 gem 'high_voltage'
 gem 'therubyracer', :platform=>:ruby
@@ -62,6 +64,9 @@ gem "trailblazer"
 gem "trailblazer-rails" # if you are in rails.
 gem "cells"
 gem "cells-slim"
+
+gem "responders"
+gem "roar"
 
 gem "kaminari"
 gem "kaminari-cells"

@@ -61,5 +61,17 @@ RSpec.describe Comment do
       expect(res).to be_falsey
       expect(op.errors.messages[:"body"]).to eq ["est trop long (pas plus de 160 caractères)"]
     end
+
+    it do
+      params = {
+        id: thing.id,
+        comment: {"body" => "Fantastic!", "weight"=>"1", "user"=>{"email"=>"joe@trb.org"}}
+      }
+
+      op1 = Comment::Create.call(params)
+      op2 = Comment::Create.call(params)
+
+      expect(op1.model.user.id).to eq(op2.model.user.id)
+    end
   end
 end

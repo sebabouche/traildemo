@@ -1,6 +1,7 @@
 .panel.panel-info
   .panel-heading
     h1
+      = concept("thing/cell/decorator", @thing).(:thumb)
       = @thing.name
       small< = link_to "Edit", edit_thing_path(@thing)
   .panel-body

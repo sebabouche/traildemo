@@ -1,7 +1,9 @@
 class Thing < ActiveRecord::Base
+
   class Create < Trailblazer::Operation
     include Model
     model Thing, :create
+
 
     contract do
       feature Disposable::Twin::Persisted
@@ -9,6 +11,13 @@ class Thing < ActiveRecord::Base
       property :name
       property :description
       property :file, virtual: true
+      validates :file, file_size: { less_than: 1.megabyte },
+        file_content_type: { allow: ['image/jpeg', 'image/png'] }
+
+      
+      extend Paperdragon::Model::Writer
+      processable_writer :image
+      property :image_meta_data, deserializer: {writeable: false}
 
       validates :name, presence: true
       validates :description, length: {in: 4..160}, allow_blank: true
@@ -41,6 +50,10 @@ class Thing < ActiveRecord::Base
     end
 
     include Dispatch
+    callback(:upload) do
+      on_change :upload_image!, property: :file
+    end
+    
     callback do 
       collection :users do
         on_add :notify_author!
@@ -52,12 +65,22 @@ class Thing < ActiveRecord::Base
 
     def process(params)
       validate(params[:thing]) do |f|
+        dispatch!(:upload)
+        # upload_image!(f) if f.changed?(:file)
         f.save
         dispatch!
       end
     end
 
     private
+
+    def upload_image!(contract)
+      contract.image!(contract.file) do |ff|
+        ff.process!(:original)
+        ff.process!(:thumb) { |job| job.thumb!("120x120#") }
+      end
+    end
+        
 
     def notify_author!(user)
       # return UserMailer.welcome_and_added(user, model) if user.created?

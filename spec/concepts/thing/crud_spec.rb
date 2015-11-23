@@ -36,7 +36,33 @@ RSpec.describe Thing::Create, type: :operation do
       expect(op.contract.errors.to_s).to eq "{:description=>[\"est trop court (au moins 4 caractères)\"]}" 
     end
 
-  # USERS
+
+    # FILE UPLOAD
+    it 'valid upload' do
+      # thing = Thing::Create.call(thing: {name: "Rail", file: File.open("spec/images/cells.jpg")}).model
+      thing = Thing::Create.call(thing: {name: "Rail", file: fixture_file_upload("cells.jpg", "image/jpeg")}).model
+
+      expect(Paperdragon::Attachment.new(thing.image_meta_data).exists?).to be_truthy
+    end
+
+    it "hack" do
+      thing = Thing::Create.(thing: {name: "Rails",
+        image_meta_data: {bla: 1}}).model
+      
+      expect(thing.image_meta_data).to be_nil
+    end
+
+    it "invalid upload" do
+      res, op = Thing::Create.run(thing: {name: "Rails",
+        file: fixture_file_upload("hack.pdf")})
+
+      expect(res).to be_falsey
+      # expect(op.errors.to_s).to eq "{:file=>[\"file has an extension that does not match its contents\", \"file should be one of image/jpeg, image/png\"]}"
+      expect(op.errors.to_s).to eq "{:file=>[\"translation missing: fr.activemodel.errors.models.thing.attributes.file.allowed_file_content_types\"]}"
+    end    
+
+
+    # USERS
     it 'rejects invalid users email' do
       res, op = Thing::Create.run(thing: {
         name: Rails,
@@ -158,8 +184,6 @@ RSpec.describe Thing::Create, type: :operation do
       joe = op.model.users[0]
 
       res, op = Thing::Update.run(id: op.model.id, thing: {name: "Rails", users: [{"id"=>joe.id.to_s, "remove"=>"1"}]})
-
-      ap op.inspect
 
       expect(res).to be_truthy
       expect(op.model.users).to eq []

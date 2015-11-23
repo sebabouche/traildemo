@@ -17,7 +17,6 @@
 // GEMS
 //= require bootstrap
 //= require lightbox
-//= require refile
 //= require moment
 //= require moment/fr
 //= require bootstrap-datetimepicker

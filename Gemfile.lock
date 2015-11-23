@@ -1,14 +1,4 @@
 GIT
-  remote: https://github.com/refile/refile.git
-  revision: 6d06fe28d11b2aaeee900b63c1c25e620bc7da1a
-  branch: master
-  specs:
-    refile (0.6.2)
-      mime-types
-      rest-client (~> 1.8)
-      sinatra (~> 1.4.5)
-
-GIT
   remote: https://github.com/trailblazer/rspec-trailblazer.git
   revision: 5bd886213108e66271b984600cfb2a8e4b18955d
   specs:
@@ -59,12 +49,6 @@ GEM
       execjs
       json
     awesome_print (1.6.1)
-    aws-sdk (2.2.0)
-      aws-sdk-resources (= 2.2.0)
-    aws-sdk-core (2.2.0)
-      jmespath (~> 1.0)
-    aws-sdk-resources (2.2.0)
-      aws-sdk-core (= 2.2.0)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
     bootstrap-datepicker-rails (1.5.0)
@@ -77,9 +61,9 @@ GEM
     bootstrap3-datetimepicker-rails (4.15.35)
       momentjs-rails (>= 2.8.1)
     bootstrap_form (2.3.0)
-    bootsy (2.1.0)
+    bootsy (2.2.0)
       carrierwave (~> 0.10)
-      mini_magick (~> 4.0)
+      mini_magick (~> 4.3)
       remotipart (~> 1.2)
     bower-rails (0.10.0)
     builder (3.2.2)
@@ -137,6 +121,10 @@ GEM
     dotenv-rails (2.0.2)
       dotenv (= 2.0.2)
       railties (~> 4.0)
+    dragonfly (1.0.12)
+      addressable (~> 2.3)
+      multi_json (~> 1.0)
+      rack (>= 1.3.0)
     draper (2.1.0)
       actionpack (>= 3.0)
       activemodel (>= 3.0)
@@ -156,6 +144,9 @@ GEM
     faraday (0.9.2)
       multipart-post (>= 1.2, < 3)
     ffi (1.9.10)
+    file_validators (2.0.2)
+      activemodel (>= 3.0)
+      mime-types (>= 1.0)
     font-awesome-rails (4.4.0.0)
       railties (>= 3.2, < 5.0)
     font-awesome-sass (4.4.0)
@@ -196,7 +187,6 @@ GEM
     jbuilder (2.3.2)
       activesupport (>= 3.0.0, < 5)
       multi_json (~> 1.2)
-    jmespath (1.1.3)
     jquery-rails (4.0.5)
       rails-dom-testing (~> 1.0)
       railties (>= 4.2.0)
@@ -228,7 +218,7 @@ GEM
       httpi
       json
     method_source (0.8.2)
-    mime-types (2.6.2)
+    mime-types (2.99)
     mini_magick (4.3.6)
     mini_portile (0.6.2)
     minitest (5.8.3)
@@ -248,7 +238,7 @@ GEM
     multipart-post (2.0.0)
     nenv (0.2.0)
     netrc (0.11.0)
-    nokogiri (1.6.6.3)
+    nokogiri (1.6.6.4)
       mini_portile (~> 0.6.0)
     notiffany (0.0.8)
       nenv (~> 0.1)
@@ -256,6 +246,9 @@ GEM
     numbers_and_words (0.10.0)
       activesupport
       i18n
+    paperdragon (0.0.10)
+      dragonfly (~> 1.0.12)
+      uber
     pg (0.18.4)
     phony (2.15.8)
     phony_rails (0.12.11)
@@ -275,8 +268,6 @@ GEM
     quiet_assets (1.1.0)
       railties (>= 3.1, < 5.0)
     rack (1.6.4)
-    rack-protection (1.5.3)
-      rack
     rack-test (0.6.3)
       rack (>= 1.0)
     rails (4.2.5)
@@ -298,7 +289,7 @@ GEM
       rails-deprecated_sanitizer (>= 1.0.1)
     rails-html-sanitizer (1.0.2)
       loofah (~> 2.0)
-    rails-i18n (4.0.6)
+    rails-i18n (4.0.7)
       i18n (~> 0.7)
       railties (~> 4.0)
     rails_12factor (0.0.3)
@@ -318,23 +309,21 @@ GEM
       ffi (>= 0.5.0)
     rdoc (4.2.0)
     ref (2.0.0)
-    refile-mini_magick (0.2.0)
-      mini_magick (~> 4.0)
-      refile (~> 0.5)
-    refile-s3 (0.2.0)
-      aws-sdk (~> 2.0)
-      refile (~> 0.6.0)
     reform (2.0.5)
       disposable (~> 0.1.11)
       uber (~> 0.0.11)
     remotipart (1.2.1)
     representable (2.3.0)
       uber (~> 0.0.7)
-    request_store (1.2.0)
+    request_store (1.2.1)
+    responders (2.1.0)
+      railties (>= 4.2.0, < 5)
     rest-client (1.8.0)
       http-cookie (>= 1.0.2, < 2.0)
       mime-types (>= 1.16, < 3.0)
       netrc (~> 0.7)
+    roar (1.0.3)
+      representable (>= 2.0.1, <= 3.0.0)
     rspec (3.4.0)
       rspec-core (~> 3.4.0)
       rspec-expectations (~> 3.4.0)
@@ -358,7 +347,7 @@ GEM
       rspec-expectations (~> 3.4.0)
       rspec-mocks (~> 3.4.0)
       rspec-support (~> 3.4.0)
-    rspec-support (3.4.0)
+    rspec-support (3.4.1)
     rubyzip (1.1.7)
     sass (3.4.19)
     sass-rails (5.0.4)
@@ -384,10 +373,6 @@ GEM
     simple_form (3.2.0)
       actionpack (~> 4.0)
       activemodel (~> 4.0)
-    sinatra (1.4.6)
-      rack (~> 1.4)
-      rack-protection (~> 1.4)
-      tilt (>= 1.3, < 3)
     slim (3.0.6)
       temple (~> 0.7.3)
       tilt (>= 1.3.3, < 2.1)
@@ -437,7 +422,7 @@ GEM
       railties (>= 4.0)
       sprockets-rails (>= 2.0, < 4.0)
     websocket (1.2.2)
-    wicked_pdf (1.0.0)
+    wicked_pdf (1.0.1)
     wkhtmltopdf-binary (0.9.9.3)
     xpath (2.0.0)
       nokogiri (~> 1.3)
@@ -467,6 +452,7 @@ DEPENDENCIES
   email_validator
   factory_girl_rails
   faker
+  file_validators
   font-awesome-rails
   font-awesome-sass
   gibbon
@@ -486,6 +472,7 @@ DEPENDENCIES
   money-rails
   nokogiri
   numbers_and_words
+  paperdragon
   pg
   phony_rails
   premailer-rails
@@ -495,9 +482,8 @@ DEPENDENCIES
   rails-i18n (~> 4.0.0)
   rails_12factor
   rails_layout
-  refile!
-  refile-mini_magick
-  refile-s3
+  responders
+  roar
   rspec-cells
   rspec-rails
   rspec-trailblazer!
