@@ -35,7 +35,7 @@ RSpec.describe Comment do
       )
 
       expect(res).to be_falsey
-      expect(op.errors.messages).to eq(:thing=>["doit être rempli(e)"], :"user.email"=>["doit être rempli(e)", "n'est pas valide"] )
+      expect(op.errors.messages).to eq(:thing=>["doit être rempli(e)"], :"user"=>["doit être rempli(e)"] )
     end
 
     it "invalid email, wrong weight" do

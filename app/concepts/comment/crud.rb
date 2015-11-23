@@ -23,9 +23,9 @@ class Comment < ActiveRecord::Base
 
       property :user, 
        prepopulator: -> (*) { self.user = User.new },
-       populator: :populate_user! do
-          property :email
-          validates :email, presence: true, email: true
+       populator: ->(fragment, *) { self.user = User.find_by(email: fragment["email"]) || User.new } do
+        property :email
+        validates :email, presence: true, email: true
       end
 
       def populate_user!(fragment, *)
@@ -49,7 +49,7 @@ class Comment < ActiveRecord::Base
       model.thing = Thing.find_by_id(params[:id])
       
       ### if static population
-      model.build_user
+      # model.build_user
     end
   end
 end
