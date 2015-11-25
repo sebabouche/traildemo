@@ -1,0 +1,11 @@
+h1 Activate your account, #{@form.model.email}
+
+= simple_form_for(@form, url: session_wake_up_path(id: params[:id]), method: :post) do |f|
+  = f.error_notification
+
+  = f.input :password
+  = f.input :confirm_password
+
+  = f.button :submit, "Engage!", class: "btn-primary"
+
+  = f.input :confirmation_token, as: :hidden, input_html: {value: @operation.confirmation_token}

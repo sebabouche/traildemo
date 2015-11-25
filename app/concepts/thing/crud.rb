@@ -50,10 +50,13 @@ class Thing < ActiveRecord::Base
     end
 
     include Dispatch
-    callback(:upload) do
+    callback(:before_save) do
       on_change :upload_image!, property: :file
+      collection :users do
+        on_add :sign_up_sleeping!
+      end
     end
-    
+
     callback do 
       collection :users do
         on_add :notify_author!
@@ -65,7 +68,7 @@ class Thing < ActiveRecord::Base
 
     def process(params)
       validate(params[:thing]) do |f|
-        dispatch!(:upload)
+        dispatch!(:before_save)
         # upload_image!(f) if f.changed?(:file)
         f.save
         dispatch!
@@ -81,6 +84,13 @@ class Thing < ActiveRecord::Base
       end
     end
         
+    def sign_up_sleeping!(user)
+      return if user.persisted?
+
+      auth = Tyrant::Authenticatable.new(user.model)
+      auth.confirmable!
+      auth.sync
+    end
 
     def notify_author!(user)
       # return UserMailer.welcome_and_added(user, model) if user.created?

@@ -24,6 +24,9 @@ gem "bower-rails", "~> 0.10.0"
 # gem 'omniauth'
 # gem 'omniauth-facebook'
 
+# gem 'tyrant'
+gem 'tyrant', git: 'https://github.com/apotonick/tyrant.git'
+gem "warden"
 
 gem 'simple_form'
 gem 'bootstrap-sass'

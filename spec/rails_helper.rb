@@ -6,6 +6,7 @@ abort("The Rails environment is running in production mode!") if Rails.env.produ
 require 'spec_helper'
 require 'rspec/rails'
 # Add additional requires below this line. Rails is not loaded until this point!
+require 'capybara/rails'
 require 'capybara/rspec'
 require 'shoulda/matchers'
 
@@ -63,4 +64,7 @@ RSpec.configure do |config|
   
   # Include RSpec::Trailblazer::Matchers for operation tests
   config.include RSpec::Trailblazer::Matchers, type: :operation
+
+  config.include Capybara::DSL
+  
 end

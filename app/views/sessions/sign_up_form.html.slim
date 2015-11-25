@@ -1,0 +1,10 @@
+h1.page-header Come join us!
+
+= simple_form_for @form, url: sessions_sign_up_path do |f|
+  = f.error_notification
+
+  = f.input :email
+  = f.input :password
+  = f.input :confirm_password
+
+  = f.button :submit, "Sign Up!", class: "btn-primary"

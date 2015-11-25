@@ -33,8 +33,14 @@ class Comment < ActiveRecord::Base
       end
     end
 
+    include Dispatch
+    callback do
+      on_change :sign_up_sleeping!, property: :user
+    end
+
     def process(params)
       validate(params[:comment]) do |f|
+        dispatch!
         f.save
       end
     end
@@ -44,12 +50,20 @@ class Comment < ActiveRecord::Base
     end
     
     private
-
+    
     def setup_model!(params) # run before process
       model.thing = Thing.find_by_id(params[:id])
       
       ### if static population
       # model.build_user
     end
+
+    # require_dependency "sessions/operations"
+    def sign_up_sleeping!(comment)
+      auth = Tyrant::Authenticatable.new(comment.user.model)
+      auth.confirmable!
+      auth.sync
+    end
+
   end
 end
