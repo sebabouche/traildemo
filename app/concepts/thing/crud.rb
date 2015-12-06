@@ -1,8 +1,14 @@
 class Thing < ActiveRecord::Base
 
   class Create < Trailblazer::Operation
-    include Model
+    include Resolver
     model Thing, :create
+    policy Thing::Policy, :create?
+
+    builds -> (model, policy, params) do
+      return self::Admin if policy.admin?
+      return self::SignedIn if policy.signed_in?
+    end
 
 
     contract do
@@ -10,10 +16,10 @@ class Thing < ActiveRecord::Base
 
       property :name
       property :description
+
       property :file, virtual: true
       validates :file, file_size: { less_than: 1.megabyte },
         file_content_type: { allow: ['image/jpeg', 'image/png'] }
-
       
       extend Paperdragon::Model::Writer
       processable_writer :image
@@ -31,9 +37,16 @@ class Thing < ActiveRecord::Base
         validates :email, presence: true, email: true
         validate :authorship_limit_reached?
 
+        def readonly?
+          model.persisted?
+        end
+        alias_method :removeable?, :readonly?
+
+        private
+
         def authorship_limit_reached?
-          return if model.authorships.find_all { |au| au.confirmed == false }.size < 5
-          errors.add(:user, "This user has too many unconfirmed authorships.")
+          return if model.authorships.find_all { |au| au.confirmed == 0 }.size < 5
+          errors.add("user", "This user has too many unconfirmed authorships.")
         end
       end
       validates :users, length: {maximum: 3}
@@ -45,7 +58,7 @@ class Thing < ActiveRecord::Base
       end
 
       def populate_users!(params, options)
-        User.find_by_email(params[:email]) or User.new
+        User.find_by_email(params["email"]) or User.new
       end
     end
 
@@ -104,6 +117,13 @@ class Thing < ActiveRecord::Base
     def expire_cache!(thing)
       CacheVersion.for("thing/cell/grid").expire!
     end
+
+    class SignedIn < self
+      include Thing::SignedIn
+    end
+
+    class Admin < SignedIn
+    end
   end
 
   class Update < Create
@@ -116,10 +136,6 @@ class Thing < ActiveRecord::Base
         property :remove, virtual: true
         property :email, skip_if: :skip_email?
 
-        def removeable?
-          model.persisted?
-        end
-
         def skip_email?(fragment, options)
           model.persisted?
         end
@@ -128,10 +144,7 @@ class Thing < ActiveRecord::Base
       private
 
       def skip_user?(fragment, options)
-        if fragment[:remove] == "1"
-          users.delete(users.find { |u| u.id.to_s == fragment["id"] })
-          return true
-        end
+        return true if fragment[:remove] == "1" and users.delete(users.find { |u| u.id.to_s == fragment["id"] })
         return true if fragment["email"].blank?
       end
     end

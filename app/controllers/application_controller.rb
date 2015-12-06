@@ -13,8 +13,8 @@ class ApplicationController < ActionController::Base
 
   helper_method :tyrant
 
-  #def process_params!(params)
-  #  params.merge!(current_user: tyrant.current_user)
-  #end  
+  def process_params!(params)
+    params.merge!(current_user: tyrant.current_user)
+  end  
   
 end

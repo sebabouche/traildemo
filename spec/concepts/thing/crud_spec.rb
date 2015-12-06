@@ -89,19 +89,18 @@ RSpec.describe Thing::Create, type: :operation do
     end
 
     it 'valid, new and existing email' do
-      pending
-
-      solnic = User.create(email: "solnic@trb.org")
+      solnic = User::Create.(user: {email: "solnic@trb.org"}).model
       expect(User.count).to eq(1)
 
-      model = Thing::Create.call(thing: {
+      op = Thing::Create.call(thing: {
         name: "Rails",
         users: [{"email" => "solnic@trb.org"}, {"email" => "nick@trb.org"}]
-      }).model
+      })
+      thing = op.model
 
-      expect(model.users.size).to eq(2)
-      expect(model.users[0].attributes).to eq("id"=>solnic.id, "email"=>"solnic@trb.org")
-      expect(model.authorships.pluck(:confirmed)).to eq([0, 0])
+      expect(thing.users.size).to eq(2)
+      expect(thing.users[0].attributes.slice("id", "email")).to eq("id" => solnic.id, "email" => "solnic@trb.org")
+      expect(thing.authorships.pluck(:confirmed)).to eq([0, 0])
 
       expect(op.invocations[:default].invocations[0]).to eq [:on_add, :notify_author!, [op.contract.users[0], op.contract.users[1]]]
     end
@@ -115,7 +114,6 @@ RSpec.describe Thing::Create, type: :operation do
     end
 
     it do
-      pending
       5.times { |i| Thing::Create.(thing: {name: "Rails #{i}", users: [{"email"=>"nick@trb.org"}]}) }
       res, op = Thing::Create.run(thing: {name: "Rails", users: [{"email"=>"nick@trb.org"}]})
 
