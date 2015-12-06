@@ -1,5 +1,4 @@
 require 'rails_helper'
-require_dependency "session/operations"
 
 RSpec.describe ThingsController, type: :controller do
   render_views
