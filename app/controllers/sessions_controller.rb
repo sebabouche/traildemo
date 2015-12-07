@@ -50,7 +50,7 @@ class SessionsController < ApplicationController
 
   def wake_up
     run Session::WakeUp do
-      flash[:notice] = "Password changed."
+      flash[:notice] = "Password saved."
       redirect_to sessions_sign_in_form_path and return
     end
 

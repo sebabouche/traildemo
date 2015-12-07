@@ -25,6 +25,7 @@ gem "bower-rails", "~> 0.10.0"
 # gem 'omniauth-facebook'
 
 # gem 'tyrant'
+# gem 'tyrant', path: "../gems/tyrant" (PullRequest for real token generation)
 gem 'tyrant', git: 'https://github.com/apotonick/tyrant.git'
 gem "warden"
 

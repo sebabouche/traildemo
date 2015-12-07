@@ -50,7 +50,9 @@ RSpec.describe SessionsController, type: :controller do
       fill_in "user[confirm_password]", with: "123"
       click_button "Engage!"
 
-      expect(page).to have_content "Password changed."
+      user = User.find(user.id) # why should I reload user to pass the test?
+
+      expect(page).to have_content "Password saved."
       expect(Tyrant::Authenticatable.new(user).confirmed?).to be_truthy
 
       expect(page.current_path).to eq "/sessions/sign_in_form"

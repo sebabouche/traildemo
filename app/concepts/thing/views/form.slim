@@ -1,0 +1,26 @@
+h3.page-header What do you want to talk about ?
+
+= simple_form_for contract, html: {class: css_class} do |f| 
+  
+  = f.error_notification
+
+  = f.input :name, readonly: contract.readonly?(:name)
+  = f.input :description
+  = f.input :file, as: :file
+
+  .panel.panel-default
+    .panel-heading
+      h3 Do you know any authors?
+    .panel-body
+      - if signed_in?
+        = f.input :is_author, as: :boolean, label: "I'm the author"
+
+      = f.simple_fields_for :users do |ff|
+        - if @operation.instance_of? Thing::Create
+          = ff.input :email
+        - else
+          = ff.input :email, readonly: ff.object.readonly?
+          - if ff.object.removeable?
+            = ff.input :remove, as: :boolean, input_html: {checked: false}
+  
+  = f.submit

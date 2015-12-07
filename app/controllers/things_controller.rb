@@ -1,4 +1,5 @@
 class ThingsController < ApplicationController
+  respond_to :html
 
   def index
     @things = Thing.all.page(1).per(2)
@@ -11,6 +12,8 @@ class ThingsController < ApplicationController
 
   def new
     form Thing::Create
+    @form.prepopulate!
+    render_form
   end
 
   def create
@@ -51,5 +54,11 @@ class ThingsController < ApplicationController
 
     render js:
       concept("comment/cell/grid", @thing, page: params[:page]).(:append)
+  end
+
+  private
+
+  def render_form
+    render text: concept("thing/cell/form", @operation), layout: true
   end
 end

@@ -1,9 +1,10 @@
 class Thing < ActiveRecord::Base
 
   class Create < Trailblazer::Operation
-    include Resolver
-    model Thing, :create
+
+    include Resolver # include Resolver == include Model + include Policy (thus available in the builder block)
     policy Thing::Policy, :create?
+    model Thing, :create
 
     builds -> (model, policy, params) do
       return self::Admin if policy.admin?
